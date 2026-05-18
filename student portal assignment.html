@@ -1,0 +1,482 @@
+Name-maneesh koundinya,Roll no-AV.SC.U4CSE25253,Section-CSE-C
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maneesh Student Portal</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #e9ebf0;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-box {
+            background: white;
+            width: 320px;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px lightgray;
+        }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid gray;
+        }
+        button {
+            padding: 12px 20px;
+            background: deeppink;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .dashboard {
+            display: none;
+        }
+        .top-box {
+            background: white;
+            margin: 15px;
+            border-radius: 20px;
+            padding: 20px;
+        }
+        .profile {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .profile-left {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .profile img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+        }
+
+        .details-btn {
+            background: deeppink;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 20px;
+            border: none;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 20px;
+            padding: 15px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.03);
+        }
+        .icon {
+            width: 60px;
+            height: 60px;
+            background: deeppink;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+        }
+
+        .card h2 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        .card p {
+            color: gray;
+            font-size: 15px;
+        }
+        .page {
+            display: none;
+            padding: 20px;
+        }
+        .page-header {
+            background: deeppink;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th,
+        td {
+            border: 1px solid lightgray;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background: deeppink;
+            color: white;
+        }
+        .break {
+            background: lightgray;
+            font-weight: bold;
+        }
+        .cgpa-row td {
+            background: darkslategray;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginPage">
+        <div class="login-box">
+            <h2>Student Login</h2>
+            <input type="text" id="name" placeholder="Username">
+            <input type="text" id="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+    <div class="dashboard" id="dashboard">
+        <div class="top-box">
+            <div class="profile">
+                <div class="profile-left">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+                    <div>
+                        <h2>VOORE MANEESH KOUNDINYA</h2>
+                        <p><b>Program :</b> B.Tech</p>
+                        <p><b>Roll Number :</b> AV.SC.U4CSE25253</p>
+                    </div>
+                </div>
+                <button class="details-btn"
+                    onclick="openPage('personalPage')">
+                    View Details
+                </button>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="card" onclick="openPage('timetablePage')">
+                <div class="icon">🕒</div>
+                <h2>Time Table</h2>
+                <p>View Weekly Time Table</p>
+            </div>
+            <div class="card" onclick="openPage('attendancePage')">
+                <div class="icon">📊</div>
+                <h2>Attendance</h2>
+                <p>View Attendance Details</p>
+            </div>
+            <div class="card" onclick="openPage('assignmentsPage')">
+                <div class="icon">📝</div>
+                <h2>Assignments</h2>
+                <p>View Assignment Details</p>
+            </div>
+            <div class="card" onclick="openPage('cgpaPage')">
+                <div class="icon">🎯</div>
+                <h2>Results</h2>
+                <p>View SGPA And CGPA</p>
+            </div>
+            <div class="card" onclick="logout()">
+                <div class="icon">🚪</div>
+                <h2>Logout</h2>
+                <p>Exit Portal</p>
+            </div>
+        </div>
+    </div>
+    <div class="page" id="timetablePage">
+        <button class="back-btn"
+            onclick="goBack('timetablePage')">
+            Back
+        </button>
+        <div class="page-header">
+            <h1>Class Timetable</h1>
+        </div>
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>9:00 - 10:00</th>
+                <th>10:00 - 11:00</th>
+                <th>11:00 - 11:15</th>
+                <th>11:15 - 12:15</th>
+                <th>12:15 - 1:15</th>
+            </tr>
+            <tr>
+                <td>Monday</td>
+                <td>OOPs</td>
+                <td>HTML</td>
+                <td rowspan="6" class="break">BREAK</td>
+                <td>Linear Algebra</td>
+                <td>GGI</td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td>Discrete Mathematics</td>
+                <td>Modern Physics</td>
+                <td>HTML</td>
+                <td>Manufacturing Practice</td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td>OOPs</td>
+                <td>Linear Algebra</td>
+                <td>GGI</td>
+                <td>Modern Physics</td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td>Manufacturing Practice</td>
+                <td>Discrete Mathematics</td>
+                <td>HTML</td>
+                <td>OOPs</td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td>Linear Algebra</td>
+                <td>GGI</td>
+                <td>Modern Physics</td>
+                <td>Discrete Mathematics</td>
+            </tr>
+            <tr>
+                <td>Saturday</td>
+                <td>HTML</td>
+                <td>Manufacturing Practice</td>
+                <td>OOPs</td>
+                <td>Linear Algebra</td>
+            </tr>
+        </table>
+    </div>
+    <div class="page" id="attendancePage">
+        <button class="back-btn"
+            onclick="goBack('attendancePage')">
+            Back
+        </button>
+        <div class="page-header">
+            <h1>Attendance</h1>
+        </div>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Attendance</th>
+            </tr>
+
+            <tr>
+                <td>Discrete Mathematics</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>Linear Algebra</td>
+                <td>97.8%</td>
+            </tr>
+            <tr>
+                <td>OOPs</td>
+                <td>92.5%</td>
+            </tr>
+            <tr>
+                <td>Modern Physics</td>
+                <td>96.3%</td>
+            </tr>
+            <tr>
+                <td>HTML</td>
+                <td>100%</td>
+            </tr>
+
+            <tr>
+                <td>Manufacturing Practice</td>
+                <td>100%</td>
+            </tr>
+            <tr>
+                <td>GGI</td>
+                <td>93.5%</td>
+            </tr>
+        </table>
+    </div>
+    <div class="page" id="assignmentsPage">
+        <button class="back-btn"
+            onclick="goBack('assignmentsPage')">
+            Back
+        </button>
+        <div class="page-header">
+            <h1>Assignments</h1>
+        </div>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Assignment</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Discrete Mathematics</td>
+                <td>Assignment 2,3</td>
+                <td>Pending</td>
+            </tr>
+            <tr>
+                <td>Linear Algebra</td>
+                <td>Homework</td>
+                <td>Completed</td>
+            </tr>
+            <tr>
+                <td>OOPs</td>
+                <td>Project Certification</td>
+                <td>Pending</td>
+            </tr>
+            <tr>
+                <td>HTML</td>
+                <td>Website Project</td>
+                <td>Completed</td>
+            </tr>
+        </table>
+    </div>
+    <div class="page" id="cgpaPage">
+        <button class="back-btn"
+            onclick="goBack('cgpaPage')">
+            Back
+        </button>
+        <div class="page-header">
+            <h1>Results And CGPA</h1>
+        </div>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+            </tr>
+            <tr>
+                <td>Discrete Mathematics</td>
+                <td>67</td>
+            </tr>
+            <tr>
+                <td>Linear Algebra</td>
+                <td>79</td>
+            </tr>
+            <tr>
+                <td>OOPs</td>
+                <td>74</td>
+            </tr>
+            <tr>
+                <td>Modern Physics</td>
+                <td>84</td>
+            </tr>
+            <tr>
+                <td>HTML</td>
+                <td>90</td>
+            </tr>
+            <tr>
+                <td>Manufacturing Practice</td>
+                <td>96</td>
+            </tr>
+            <tr>
+                <td>GGI</td>
+                <td>98</td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                <th>Semester</th>
+                <th>SGPA</th>
+            </tr>
+            <tr>
+                <td>Semester 1</td>
+                <td>7.3</td>
+            </tr>
+            <tr class="cgpa-row">
+                <td>Overall CGPA</td>
+                <td>7.3</td>
+            </tr>
+        </table>
+    </div>
+    <div class="page" id="personalPage">
+        <button class="back-btn"
+            onclick="goBack('personalPage')">
+            Back
+        </button>
+        <div class="page-header">
+            <h1>Personal Information</h1>
+        </div>
+        <table>
+            <tr>
+                <th>Field</th>
+                <th>Details</th>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Maneesh Koundinya</td>
+            </tr>
+            <tr>
+                <td>Roll Number</td>
+                <td>AV.SC.U4CSE25253</td>
+            </tr>
+
+            <tr>
+                <td>Department</td>
+                <td>Computer Science Engineering</td>
+            </tr>
+            <tr>
+                <td>Section</td>
+                <td>CSE-C</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>********@gmail.com</td>
+            </tr>
+            <tr>
+                <td>Program</td>
+                <td>B.Tech</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function login() {
+            let user =
+                document.getElementById("name").value;
+            let pass =
+                document.getElementById("password").value;
+            if (user == "maneesh" && pass == "1234") {
+                document.getElementById("loginPage").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
+            }
+            else {
+                alert("Invalid Username or Password");
+            }
+        }
+        function openPage(id) {
+            document.getElementById("dashboard").style.display = "none";
+            document.getElementById("timetablePage").style.display = "none";
+            document.getElementById("attendancePage").style.display = "none";
+            document.getElementById("assignmentsPage").style.display = "none";
+            document.getElementById("cgpaPage").style.display = "none";
+            document.getElementById("personalPage").style.display = "none";
+            document.getElementById(id).style.display = "block";
+        }
+        function goBack(id) {
+            document.getElementById(id).style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+        }
+        function logout() {
+            document.getElementById("dashboard").style.display = "none";
+            document.getElementById("loginPage").style.display = "flex";
+            document.getElementById("name").value = "";
+            document.getElementById("password").value = "";
+        }
+    </script>
+</body>
+</html>
